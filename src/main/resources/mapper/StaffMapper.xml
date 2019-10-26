@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.StaffMapper">
+    <!--  Staff_list表  <>-->
+    <select id="findAll" resultType="com.gooalgene.labtest.entity.Staff_list">
+        select * from staff_list
+    </select>
+    <select id="Sel" resultType="com.gooalgene.labtest.entity.Staff_list">
+        select * from staff_list where sl_id = #{sl_id}
+    </select>
+    <delete id="Del">
+        delete from staff_list where sl_id = #{sl_id}
+    </delete>
+    <insert id="Insert" parameterType="com.gooalgene.labtest.entity.Staff_list">
+        insert into staff_list (sl_id,sl_name,sl_type_id) values (#{sl_id},#{sl_name},#{sl_type_id})
+    </insert>
+    <update id="Update" parameterType="com.gooalgene.labtest.entity.Staff_list">
+        update staff_list
+        <trim prefix="set" suffixOverrides=",">
+            <if test="sl_name!=null">sl_name = #{sl_name},</if>
+            <if test="sl_type_id!=null">sl_type_id = #{sl_type_id},</if>
+        </trim>
+        where
+        (sl_id = #{sl_id})
+    </update>
+
+    <!--  Staff_type表  <>-->
+    <select id="SearchType" resultType="String">
+        select st_name from staff_type where st_id = #{st_id}
+    </select>
+    <select id="getAllType" resultType="String">
+        select st_name from staff_type
+    </select>
+    <select id="TypeToId" resultType="Integer">
+        select st_id from staff_type where st_name=#{st_name}
+    </select>
+    <delete id="deleteType">
+        delete from staff_type where st_id = #{st_id}
+    </delete>
+    <!--  Staff_info表  <>-->
+    <select id="getStaffInfo" resultType="com.gooalgene.labtest.entity.Staff_info">
+        select * from staff_info where si_uid = #{si_uid}
+    </select>
+
+    <insert id="insertStaffInfo" parameterType="com.gooalgene.labtest.entity.Staff_info">
+        insert into staff_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            si_uid,si_state,
+            <if test="si_graph!=null">si_graph,</if>
+            <if test="si_content!=null">si_content,</if>
+            <if test="si_url!=null">si_url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{si_uid},#{si_state},
+            <if test="si_graph!=null">#{si_graph},</if>
+            <if test="si_content!=null">#{si_content},</if>
+            <if test="si_url!=null">#{si_url},</if>
+        </trim>
+    </insert>
+    <delete id="deleteStaffInfo">
+        delete from staff_info where si_uid = #{si_uid}
+    </delete>
+
+    <update id="updateStaffInfo" parameterType="com.gooalgene.labtest.entity.Staff_info">
+        update staff_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="si_state!=null">si_state = #{si_state},</if>
+            <if test="si_content!=null">si_content = #{si_content},</if>
+            <if test="si_url!=null">si_url = #{si_url},</if>
+        </trim>
+        WHERE
+        (si_uid = #{si_uid});
+    </update>
+</mapper>

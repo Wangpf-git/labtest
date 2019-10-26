@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.NewsTypeMapper">
+    <select id="findAll" resultType="com.gooalgene.labtest.entity.News_Type">
+        select * from news_type
+    </select>
+    <select id="findById" resultType="com.gooalgene.labtest.entity.News_Type">
+        select * from news_type where nt_id=#{nt_id}
+    </select>
+    <insert id="insert" parameterType="com.gooalgene.labtest.entity.News_Type">
+        inser into news_type values(null,#{nt_name})
+    </insert>
+    <select id="findByName" resultType="com.gooalgene.labtest.entity.News_Type">
+        select * from news_type where  nt_name=#{nt_name}
+    </select>
+
+
+</mapper>

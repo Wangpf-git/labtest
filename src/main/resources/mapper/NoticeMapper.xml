@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.NoticeMapper">
+    <select id="findNotice" resultType="com.gooalgene.labtest.entity.News_List">
+        select * from news_list
+    </select>
+    <select id="findById" resultType="com.gooalgene.labtest.entity.News_List">
+        select * from news_list where nl_id =#{nl_id}
+    </select>
+    <delete id="deleteNotices" parameterType="integer">
+        delete from news_list where nl_id=#{nl_id}
+    </delete>
+    <insert id="addNotice">
+        INSERT  INTO  news_list VALUES (
+            null,#{nl_title},#{nl_content},now(),#{nl_graph},#{nl_type_id},#{nl_subType_id},#{nl_state},#{nl_url}
+        )
+        </insert>
+    <update id="updateNotice">
+        update news_list set nl_state = #{nl_state},nl_content = #{nl_content},nl_title = #{nl_title},nl_type_id = #{nl_type_id},nl_subType_id = #{nl_subType_id}, nl_url = #{nl_url} WHERE nl_id = #{nl_id}
+    </update>
+    <insert id="updateState">
+        update news_list set nl_state = #{notice.state} where nl_id in =
+        <foreach collection="notice.ids" item="id" separator="," open="(" close=")">#{id}</foreach>
+    </insert>
+</mapper>

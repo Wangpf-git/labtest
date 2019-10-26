@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.NewsSubTypeMapper">
+    <select id="findAll" resultType="com.gooalgene.labtest.entity.News_SubType">
+        select * from news_subType
+    </select>
+    <select id="findById" resultType="com.gooalgene.labtest.entity.News_SubType">
+        select * from news_subType where ns_id=#{ns_id}
+    </select>
+    <select id="findByType" resultType="com.gooalgene.labtest.entity.News_SubType">
+        select * from news_subType where ns_type_id=#{ns_type_id}
+    </select>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gooalgene.labtest.dao.PostgraduateMapper">
+    <!--  Postgraduate_list表  <>-->
+    <insert id="insertPostgraduate" parameterType="com.gooalgene.labtest.entity.Postgraduate_list">
+        insert into postgraduate_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pl_name != null">pl_name,</if>
+            pl_type_id,
+            <if test="pl_title != null">pl_title,</if>
+            <if test="pl_content != null">pl_content,</if>
+            <if test="pl_date != null">pl_date,</if>
+            <if test="pl_url != null">pl_url,</if>
+            pl_state
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pl_name != null">#{pl_name},</if>
+            #{pl_type_id},
+            <if test="pl_title != null">#{pl_title},</if>
+            <if test="pl_content != null">#{pl_content},</if>
+            <if test="pl_date != null">#{pl_date},</if>
+            <if test="pl_url != null">#{pl_url},</if>
+            pl_state
+        </trim>
+    </insert>
+    <update id="updatePostgraduate" parameterType="com.gooalgene.labtest.entity.Postgraduate_list">
+        update postgraduate_list
+        <trim prefix="set" suffixOverrides=",">
+            <if test="pl_name != null">pl_name = #{pl_name},</if>
+            <if test="pl_type_id != null">pl_type_id = #{pl_type_id},</if>
+            <if test="pl_title != null">pl_title = #{pl_title},</if>
+            <if test="pl_content != null">pl_content = #{pl_content},</if>
+            <if test="pl_date != null">pl_date = #{pl_date},</if>
+            <if test="pl_url != null">pl_url = #{pl_url},</if>
+            pl_state = #{pl_state}
+        </trim>
+        where
+        (pl_id = #{pl_id})
+    </update>
+
+    <delete id="deletePostgraduate">
+        delete
+        from postgraduate_list
+        where pl_id = #{pl_id}
+    </delete>
+
+    <select id="findAll" resultType="com.gooalgene.labtest.entity.Postgraduate_list">
+        select *
+        from postgraduate_list
+    </select>
+
+    <select id="getPostgraduate" resultType="com.gooalgene.labtest.entity.Postgraduate_list">
+        select *
+        from postgraduate_list
+        where pl_id = #{pl_id}
+    </select>
+
+    <!--  Postgraduate_type表  <>-->
+    <select id="getAlltype" resultType="String">
+        select pt_name
+        from postgraduate_type
+    </select>
+
+    <select id="getType" resultType="String">
+        select pt_name
+        from postgraduate_type
+        where pt_id = #{pt_id}
+    </select>
+
+    <delete id="deleteType">
+        delete
+        from postgraduate_type
+        where pt_id = #{pt_id}
+    </delete>
+
+
+</mapper>
